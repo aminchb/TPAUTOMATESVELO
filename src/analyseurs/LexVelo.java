@@ -71,7 +71,6 @@ public class LexVelo extends Lex {
 		return numIdCourant;
 	}
 
-
 	private int lireEnt() {
 		String s = "";
 		do {
@@ -81,6 +80,35 @@ public class LexVelo extends Lex {
 		valEnt = Integer.parseInt(s);
 		return NBENTIER;
 	}
+	private int lireIdent(){
+		String s = "";
+		do {
+			s = s + getCarLu();
+			lireCarLu();
+		} while ((getCarLu() >='a' && getCarLu() <='z') || (getCarLu() >='A' && getCarLu() <='Z'));
+		
+		// Mot reservé
+		for (int i=0; i<NBRES; i++){
+			if(tabIdent.get(i).equalsIgnoreCase(s)){
+				return i;
+			}
+		}
+
+		// Ident déjà présent
+		for (int i=NBRES; i<tabIdent.size(); i++){
+			if (tabIdent.get(i).equals(s)) {
+				numIdCourant = i;
+				return IDENT;
+			}
+		}
+
+		// Nouveau Ident
+		tabIdent.add(s);
+		numIdCourant = tabIdent.size() - 1;
+		return IDENT;
+	}
+
+
 	/**
 	 * Lecture du prochain item lexical, et mise à jour des attributs lexicaux
 	 * correspondants.
@@ -97,12 +125,25 @@ public class LexVelo extends Lex {
 		if ((getCarLu() >= '0') && (getCarLu() <='9')){
 			return lireEnt();
 		}
+
+		if ((getCarLu() >= 'a' && getCarLu() <= 'z') || (getCarLu() >= 'A' && getCarLu() <= 'Z')){
+			return lireIdent();
+		}
+
 		// On détecte un autre item lexical
 		switch (getCarLu()) {
-			case ',': lireCarLu(); return VIRG;
-			case ';': lireCarLu(); return PTVIRG;
-			case '/': return BARRE;
-			default : System.out.println("Caractère incorrect");
+			case ';':
+				lireCarLu();
+				return PTVIRG;
+			case ',':
+				lireCarLu();
+				return VIRG;
+			case '/':
+				return BARRE;
+
+			//caractère interdit
+			default:
+				System.out.println("Caractère incorrect");
 				lireCarLu();
 				return AUTRES;
 		}
@@ -119,12 +160,7 @@ public class LexVelo extends Lex {
 	 * @return chaîne correspondant à numIdent
 	 */
 	public final String chaineIdent(int numIdent) {
-		for(String ligne : tabIdent){
-			if(ligne.contains(String.valueOf(numIdent))){
-				return ligne;
-			}
-		}
-		return "";
+		return tabIdent.get(numIdent);
 		/* 	
 		// TODO
 		throw new UnsupportedOperationException("méthode chaineIdent à imlémenter");
