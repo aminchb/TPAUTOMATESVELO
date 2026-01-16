@@ -6,8 +6,11 @@ import java.io.*;
  * La classe AutoVelo met en oeuvre l'automate d'analyse syntaxique des
  * locations de vélos, par interpreteur de tables
  * 
- * @author //TODO compléter les noms du trinôme
- *         janvier 2026
+ * @author
+ * Amin Choubai
+ * Mathieu Del Angel
+ * Alexis Guibert
+ * janvier 2026
  */
 
 public abstract class AutoVelo extends Automate {

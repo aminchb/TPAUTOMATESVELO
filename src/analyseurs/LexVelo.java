@@ -8,8 +8,11 @@ import java.util.ArrayList;
  * La classe LexVelo implémente un analyseur lexical pour une application de
  * location de velos
  * 
- * @author // TODO compléter les noms du trinôme (CHOUBAI, ..., ....)
- *         janvier 2026
+ * @author
+ * Amin Choubai
+ * Mathieu Del Angel
+ * Alexis Guibert
+ * janvier 2026
  */
 
 public class LexVelo extends Lex {
