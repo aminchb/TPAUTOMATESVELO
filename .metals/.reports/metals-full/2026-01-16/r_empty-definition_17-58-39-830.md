@@ -1,3 +1,14 @@
+error id: file:///C:/Users/aminc/Desktop/TPAUTOMATESVELO/src/analyseurs/LexVelo.java:analyseurs/LexVelo#getCarLu#
+file:///C:/Users/aminc/Desktop/TPAUTOMATESVELO/src/analyseurs/LexVelo.java
+empty definition using pc, found symbol in pc: analyseurs/LexVelo#getCarLu#
+empty definition using semanticdb
+empty definition using fallback
+non-local guesses:
+
+offset: 2068
+uri: file:///C:/Users/aminc/Desktop/TPAUTOMATESVELO/src/analyseurs/LexVelo.java
+text:
+```scala
 package analyseurs;
 
 import libIO.*;
@@ -68,16 +79,6 @@ public class LexVelo extends Lex {
 		return numIdCourant;
 	}
 
-
-	private int lireEnt() {
-		String s = "";
-		do {
-			s = s + getCarLu();
-			lireCarLu();
-		} while ((getCarLu() >= '0') && (getCarLu() <= '9'));
-		valEnt = Integer.parseInt(s);
-		return NBENTIER;
-	}
 	/**
 	 * Lecture du prochain item lexical, et mise à jour des attributs lexicaux
 	 * correspondants.
@@ -90,8 +91,9 @@ public class LexVelo extends Lex {
 		while (getCarLu() == ' ') {
 			lireCarLu();
 		}
+		
 		// On détecte le début de l'itemlexical IDENT
-		if ((getCarLu() >= '0') && (getCarLu() <='9')){
+		if ((g@@etCarLu() >= '0') && (getCarLu() <='9')){
 			return lireEnt();
 		}
 		// On détecte un autre item lexical
@@ -102,6 +104,7 @@ public class LexVelo extends Lex {
 			default : System.out.println("Caractère incorrect");
 				lireCarLu();
 				return AUTRES;
+			}
 		}
 		/* 
 		// TODO
@@ -169,3 +172,10 @@ public class LexVelo extends Lex {
 		Lecture.attenteSurLecture("fin d'analyse");
 	}
 }
+
+```
+
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: analyseurs/LexVelo#getCarLu#

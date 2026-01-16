@@ -1,3 +1,14 @@
+error id: file:///C:/Users/aminc/Desktop/TPAUTOMATESVELO/src/analyseurs/LexVelo.java
+file:///C:/Users/aminc/Desktop/TPAUTOMATESVELO/src/analyseurs/LexVelo.java
+### com.thoughtworks.qdox.parser.ParseException: syntax error @[111,15]
+
+error in qdox parser
+file content:
+```java
+offset: 2736
+uri: file:///C:/Users/aminc/Desktop/TPAUTOMATESVELO/src/analyseurs/LexVelo.java
+text:
+```scala
 package analyseurs;
 
 import libIO.*;
@@ -68,16 +79,6 @@ public class LexVelo extends Lex {
 		return numIdCourant;
 	}
 
-
-	private int lireEnt() {
-		String s = "";
-		do {
-			s = s + getCarLu();
-			lireCarLu();
-		} while ((getCarLu() >= '0') && (getCarLu() <= '9'));
-		valEnt = Integer.parseInt(s);
-		return NBENTIER;
-	}
 	/**
 	 * Lecture du prochain item lexical, et mise à jour des attributs lexicaux
 	 * correspondants.
@@ -91,17 +92,20 @@ public class LexVelo extends Lex {
 			lireCarLu();
 		}
 		// On détecte le début de l'itemlexical IDENT
+
 		if ((getCarLu() >= '0') && (getCarLu() <='9')){
 			return lireEnt();
 		}
 		// On détecte un autre item lexical
 		switch (getCarLu()) {
-			case ',': lireCarLu(); return VIRG;
+			case '+': lireCarLu(); return PLUS;
 			case ';': lireCarLu(); return PTVIRG;
+			case '*': lireCarLu(); return ETOILE;
 			case '/': return BARRE;
-			default : System.out.println("Caractère incorrect");
+			default : System.out.println("Caractèreincorrect");
 				lireCarLu();
 				return AUTRES;
+			}
 		}
 		/* 
 		// TODO
@@ -115,7 +119,7 @@ public class LexVelo extends Lex {
 	 * @param numIdent numéro d'un ident dans la table des idents
 	 * @return chaîne correspondant à numIdent
 	 */
-	public final String chaineIdent(int numIdent) {
+	public final S@@tring chaineIdent(int numIdent) {
 		for(String ligne : tabIdent){
 			if(ligne.contains(String.valueOf(numIdent))){
 				return ligne;
@@ -169,3 +173,42 @@ public class LexVelo extends Lex {
 		Lecture.attenteSurLecture("fin d'analyse");
 	}
 }
+
+```
+
+```
+
+
+
+#### Error stacktrace:
+
+```
+com.thoughtworks.qdox.parser.impl.Parser.yyerror(Parser.java:2025)
+	com.thoughtworks.qdox.parser.impl.Parser.yyparse(Parser.java:2147)
+	com.thoughtworks.qdox.parser.impl.Parser.parse(Parser.java:2006)
+	com.thoughtworks.qdox.library.SourceLibrary.parse(SourceLibrary.java:232)
+	com.thoughtworks.qdox.library.SourceLibrary.parse(SourceLibrary.java:190)
+	com.thoughtworks.qdox.library.SourceLibrary.addSource(SourceLibrary.java:94)
+	com.thoughtworks.qdox.library.SourceLibrary.addSource(SourceLibrary.java:89)
+	com.thoughtworks.qdox.library.SortedClassLibraryBuilder.addSource(SortedClassLibraryBuilder.java:162)
+	com.thoughtworks.qdox.JavaProjectBuilder.addSource(JavaProjectBuilder.java:174)
+	scala.meta.internal.mtags.JavaMtags.indexRoot(JavaMtags.scala:49)
+	scala.meta.internal.metals.SemanticdbDefinition$.foreachWithReturnMtags(SemanticdbDefinition.scala:99)
+	scala.meta.internal.metals.Indexer.indexSourceFile(Indexer.scala:546)
+	scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3(Indexer.scala:677)
+	scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3$adapted(Indexer.scala:674)
+	scala.collection.IterableOnceOps.foreach(IterableOnce.scala:630)
+	scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:628)
+	scala.collection.AbstractIterator.foreach(Iterator.scala:1313)
+	scala.meta.internal.metals.Indexer.reindexWorkspaceSources(Indexer.scala:674)
+	scala.meta.internal.metals.MetalsLspService.$anonfun$onChange$2(MetalsLspService.scala:912)
+	scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	scala.concurrent.Future$.$anonfun$apply$1(Future.scala:691)
+	scala.concurrent.impl.Promise$Transformation.run(Promise.scala:500)
+	java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	java.base/java.lang.Thread.run(Thread.java:840)
+```
+#### Short summary: 
+
+QDox parse error in file:///C:/Users/aminc/Desktop/TPAUTOMATESVELO/src/analyseurs/LexVelo.java
