@@ -11,5 +11,6 @@
     "java.inlayHints.parameterNames.enabled": "none",
     "files.watcherExclude": {
         "**/target": true
-    }
+    },
+    "java.jdt.ls.java.home": "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.9.10-hotspot"
 }
