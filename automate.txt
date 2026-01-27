@@ -1,0 +1,16 @@
+(
+    (
+        ident (nbEntier HEURES)⁽⁰˒¹⁾ DEBUT (nbEntier ADULTE | nbEntier ENFANT | nbEntier ADULTE nbEntier ENFANT)
+        |
+        ident (nbEntier HEURES)⁽⁰˒¹⁾ FIN
+    )
+    ( VIRG 
+        ( 
+            ident (nbEntier HEURES)⁽⁰˒¹⁾ DEBUT (nbEntier ADULTE | nbEntier ENFANT | nbEntier ADULTE nbEntier ENFANT)
+            |
+            ident (nbEntier HEURES)⁽⁰˒¹⁾ FIN
+        )
+    )*
+PTVIRG)* 
+
+BARRE

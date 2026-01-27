@@ -14,17 +14,23 @@ import java.io.*;
  */
 
 public abstract class AutoVelo extends Automate {
-	// TODO à compléter
 	// RAPPEL: reprise après erreur demandée sur les items VIRG, PTVIRG et BARRE
 
 	/** Table des transitions */
-	// TODO compléter la table TRANSIT, avec la numérotation standard des états
 	private static final int[][] TRANSIT = {
 			// Etat ADULTE DEBUT ENFANT FIN HEURES IDENT NBENTIER VIRG PTVIRG BARRE AUTRES
-			/* 0 */ { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-			/* 1 */ { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-			/* 2 */ { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-			/* ... {.. ,    .} */
+			/* 0 */ { 10,    10,   10,   10,  10,     1,    10,    10,   10,   11,    10 },
+			/* 1 */ { 10,     5,   10,    4,  10,    10,     2,    10,   10,   10,    10 },
+			/* 2 */ { 10,    10,   10,   10,   3,    10,    10,    10,   10,   10,    10 },
+			/* 3 */ { 10,     5,   10,    4,  10,    10,    10,    10,   10,   10,    10 },
+			/* 4 */ { 10,    10,   10,   10,  10,    10,    10,     0,    0,   10,    10 },
+			/* 5 */ { 10,    10,   10,   10,  10,    10,     6,    10,   10,   10,    10 },
+			/* 6 */ {  8,    10,    7,   10,  10,    10,    10,    10,   10,   10,    10 },
+			/* 7 */ { 10,    10,   10,   10,  10,    10,    10,     0,    0,   10,    10 },
+			/* 8 */ { 10,    10,   10,   10,  10,    10,     9,     0,    0,   10,    10 },
+			/* 9 */ { 10,    10,    7,   10,  10,    10,    10,    10,   10,   10,    10 },
+			/* e */ { -1,    -1,   -1,   -1,  -1,    -1,    -1,    -1,   -1,   -1,    -1 }, /* 10 */
+			/* f */ { -1,    -1,   -1,   -1,  -1,    -1,    -1,    -1,   -1,   -1,    -1 }, /* 11 */
 	};
 
 	/**

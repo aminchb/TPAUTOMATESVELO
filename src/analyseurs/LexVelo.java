@@ -16,7 +16,6 @@ import java.util.ArrayList;
  */
 
 public class LexVelo extends Lex {
-	// TODO à compléter
 
 	/** Nombre de mots réservés dans l'application Velo */
 	public static final int NBRES = 5;
@@ -80,6 +79,7 @@ public class LexVelo extends Lex {
 		valEnt = Integer.parseInt(s);
 		return NBENTIER;
 	}
+
 	private int lireIdent(){
 		String s = "";
 		do {
@@ -107,7 +107,6 @@ public class LexVelo extends Lex {
 		numIdCourant = tabIdent.size() - 1;
 		return IDENT;
 	}
-
 
 	/**
 	 * Lecture du prochain item lexical, et mise à jour des attributs lexicaux
@@ -147,10 +146,6 @@ public class LexVelo extends Lex {
 				lireCarLu();
 				return AUTRES;
 		}
-		/* 
-		// TODO
-		throw new UnsupportedOperationException("méthode lireSymb à implémenter");
-		*/
 	}
 
 	/**
@@ -161,10 +156,6 @@ public class LexVelo extends Lex {
 	 */
 	public final String chaineIdent(int numIdent) {
 		return tabIdent.get(numIdent);
-		/* 	
-		// TODO
-		throw new UnsupportedOperationException("méthode chaineIdent à imlémenter");
-		*/
 	}
 
 	/**

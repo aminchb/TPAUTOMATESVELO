@@ -14,13 +14,14 @@ import main.BaseDeLoc;
  * La classe ActVelo met en oeuvre les actions de l'automate d'analyse
  * syntaxique des locations de vélos
  * 
- * @author //TODO compléter les noms du trinôme
- *         janvier 2026
+ * @author
+ * Amin Choubai
+ * Mathieu Del Angel
+ * Alexis Guibert
+ * janvier 2026
  */
 
 public class ActVelo extends AutoVelo {
-	// TODO à compléter
-
 	// Raccourci d'accès à l'analyseur lexical
 	private final LexVelo analyseurLexical = (LexVelo) this.getAnalyseurLexical();
 
