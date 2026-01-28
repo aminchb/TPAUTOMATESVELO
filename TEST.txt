@@ -1,26 +1,4 @@
-================================================================================
-JEU DE TESTS PERSONNEL - GESTION DE LOCATION DE VÉLOS
-================================================================================
-Auteurs: Amin Choubai, Mathieu Del Angel, Alexis Guibert
-Date: Janvier 2026
-================================================================================
-
-Ce fichier contient des tests personnels commentés pour valider l'analyseur
-syntaxique et les actions associées. Chaque test indique:
-- Le cas testé
-- La donnée d'entrée
-- Le résultat attendu
-- Les aspects techniques vérifiés
-
-================================================================================
 TEST 1 : CAS NOMINAL SIMPLE - UNE JOURNÉE, TROIS CLIENTS
-================================================================================
-
-OBJECTIF:
-Tester le cas de base fourni dans l'énoncé avec trois clients qui louent et
-rendent des vélos le même jour.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Durand 8 HEURES DEBUT 5 ADULTE 5 ENFANT,
 Dupont 8 HEURES DEBUT 2 ADULTE 1 ENFANT,
@@ -29,6 +7,7 @@ Durand 18 HEURES FIN,
 Legros 18 HEURES DEBUT 20 ADULTE 10 ENFANT,
 Legros 19 HEURES FIN;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -49,50 +28,14 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 3 clients servis
 
-CALCULS DÉTAILLÉS:
------------------
-Dupont: 
-  - 2 adultes (4€/h) + 1 enfant (2€/h) = 10€/h
-  - Durée: 13h - 8h = 5 heures
-  - Total: 5h × 10€/h = 50€
 
-Durand:
-  - 5 adultes (4€/h) + 5 enfants (2€/h) = 30€/h
-  - Durée: 18h - 8h = 10 heures
-  - Total: 10h × 30€/h = 300€
 
-Legros:
-  - 20 adultes (4€/h) + 10 enfants (2€/h) = 100€/h
-  - Durée: 19h - 18h = 1 heure (minimum facturé)
-  - Total: 1h × 100€/h = 100€
-
-ASPECTS TESTÉS:
---------------
-✓ Reconnaissance de tous les tokens (IDENT, NBENTIER, HEURES, DEBUT, FIN, ADULTE, ENFANT)
-✓ Actions 1, 2, 3, 4, 5, 6, 7, 8, 9, 16
-✓ Séparateurs VIRG et PTVIRG (actions 10, 11, 12, 13, 14, 15)
-✓ Fin d'analyse BARRE (action 17)
-✓ Calcul de durée même jour
-✓ Durée minimale 1h (Legros: même si 18h-18h, facturé 1h)
-✓ Facturation correcte
-✓ Gestion du stock (location et restitution)
-✓ Comptage affluence (3 clients différents)
-✓ Compteurs d'opérations (6 correctes / 6 totales)
-
-================================================================================
 TEST 2 : HORAIRES PAR DÉFAUT
-================================================================================
-
-OBJECTIF:
-Vérifier que les horaires par défaut sont bien appliqués:
-- 8h pour les débuts de location sans horaire
-- 19h pour les fins de location sans horaire
-
-DONNÉE D'ENTRÉE:
 ----------------
 Martin DEBUT 3 ADULTE,
 Martin FIN;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -111,37 +54,14 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 1 clients servis
 
-CALCULS DÉTAILLÉS:
------------------
-Martin:
-  - 3 adultes × 4€/h = 12€/h
-  - Horaire début par défaut: 8h
-  - Horaire fin par défaut: 19h
-  - Durée: 19h - 8h = 11 heures
-  - Total: 11h × 12€/h = 132€
 
-ASPECTS TESTÉS:
---------------
-✓ Action 5 avec horairePresent = false → horaire = 8h
-✓ Action 4 avec horairePresent = false → horaire = 19h
-✓ Transition État 1 → DEBUT (sans passer par état 2 et 3)
-✓ Transition État 1 → FIN (sans passer par état 2 et 3)
-✓ Durée maximale journalière (19h - 8h = 11h)
-✓ Location adulte uniquement (qteEnfant = 0)
 
-================================================================================
 TEST 3 : LOCATION SUR PLUSIEURS JOURS
-================================================================================
-
-OBJECTIF:
-Tester le calcul de durée sur plusieurs jours consécutifs, avec les heures
-de nuit (19h-8h) non comptabilisées.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Bernard 10 HEURES DEBUT 2 ENFANT;
 Bernard 15 HEURES FIN;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -168,79 +88,16 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 1 clients servis
 
-CALCULS DÉTAILLÉS:
------------------
-Bernard:
-  - 2 enfants × 2€/h = 4€/h
-  - Jour 1: 19h - 10h = 9 heures
-  - Jour 2: 15h - 8h = 7 heures
-  - Durée totale: 9h + 7h = 16 heures
-  - Total: 16h × 4€/h = 64€
 
-ERREUR DANS MES CALCULS CI-DESSUS! Recalcul:
-  - Jour 1 (jourDebutLoc=1, heureDebutLoc=10): de 10h à 19h = 9h
-  - Jour 2 (jourFinLoc=2, heureFinLoc=15): de 8h à 15h = 7h
-  - PAS de jour intermédiaire (jourFinLoc - jourDebutLoc = 1)
-  - Durée = (19 - 10) + (15 - 8) = 9 + 7 = 16h
-  - Correction si jourFinLoc > jourDebutLoc + 1: NON (2 > 1+1 est faux)
-  - Total: 16h × 2€/h = 32€
 
-ERREUR DANS MON ÉNONCÉ! Relisons calculDureeLoc():
-```java
-duree = 19 - heureDebutLoc; // duree du premier jour = 19-10 = 9
-duree = duree + (heureFinLoc - 8); // ajout dernier jour = 9 + (15-8) = 16
-if (jourFinLoc > jourDebutLoc + 1) { // 2 > 2 ? NON
-    duree = duree + 11 * (jourFinLoc - jourDebutLoc - 1);
-}
-// duree = 16h
-```
-16h × 2€/h × 2 vélos = 64€
-
-NON! Erreur dans ma lecture:
-2 enfants × 2€/h = 4€/h (tarif horaire total)
-16h × 4€/h = 64€
-
-MAIS l'attendu dit 48€? Vérifions:
-Si 48€ / 2€ = 24 heures-vélo
-24 / 2 vélos = 12 heures
-
-12 heures correspondent à: (19-10) + (15-8) - 4h ???
-
-Recalcul correct:
-Jour 1: 10h à 19h = 9h
-Jour 2: 8h à 15h = 7h
-MAIS il faut soustraire la nuit non comptée!
-Non, la nuit est déjà exclue dans le calcul...
-
-Je vais garder le calcul de la fonction:
-duree = (19-10) + (15-8) = 9 + 7 = 16h
-Montant = 16h × (0×4€ + 2×2€) = 16h × 4€/h = 64€
-
-ASPECTS TESTÉS:
---------------
-✓ Location sur 2 jours consécutifs
-✓ Affichage location en cours dans bilan jour 1
-✓ Calcul durée multi-jours avec calculDureeLoc()
-✓ Heures de nuit (19h-8h) non comptabilisées
-✓ Location enfant uniquement
-✓ Libération des vélos au jour 2
-✓ Vélos manquants jour 1 = 2, jour 2 = 0
-
-================================================================================
 TEST 4 : LOCATION SUR 4 JOURS (AVEC JOURS INTERMÉDIAIRES)
-================================================================================
-
-OBJECTIF:
-Tester le calcul de durée sur plus de 2 jours, avec des jours intermédiaires
-comptés à 11h chacun (8h-19h).
-
-DONNÉE D'ENTRÉE:
 ----------------
 Claire 9 HEURES DEBUT 1 ADULTE 1 ENFANT;
 ;
 ;
 Claire 18 HEURES FIN;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -281,47 +138,13 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 1 clients servis
 
-CALCULS DÉTAILLÉS:
------------------
-Claire:
-  - 1 adulte (4€/h) + 1 enfant (2€/h) = 6€/h
-  - Jour 1: 19h - 9h = 10 heures
-  - Jours 2-3: 2 jours × 11h = 22 heures
-  - Jour 4: 18h - 8h = 10 heures
-  - Durée totale: 10 + 22 + 10 = 42 heures
-  - Total: 42h × 6€/h = 252€
 
-Formule dans calculDureeLoc():
-```java
-duree = 19 - 9; // = 10
-duree = duree + (18 - 8); // = 10 + 10 = 20
-if (4 > 1 + 1) { // 4 > 2 ? OUI
-    duree = duree + 11 * (4 - 1 - 1); // = 20 + 11*2 = 20 + 22 = 42
-}
-```
-42h × 6€/h = 252€ ✓
 
-ASPECTS TESTÉS:
---------------
-✓ Location sur 4 jours
-✓ Jours intermédiaires comptés à 11h chacun
-✓ Validations vides (PTVIRG PTVIRG)
-✓ Location en cours affichée plusieurs fois
-✓ Calcul complexe avec la formule complète
-✓ Location adulte + enfant
-✓ Affichage correct sur plusieurs bilans
-
-================================================================================
 TEST 5 : ERREUR NON FATALE - HORAIRE INVALIDE (< 8)
-================================================================================
-
-OBJECTIF:
-Vérifier la détection d'un horaire inférieur à 8h et la reprise d'erreur.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Robert 7 HEURES DEBUT 1 ADULTE;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -340,27 +163,13 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 0 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Détection horaire < 8 dans traiterDebutLocation()
-✓ Message d'erreur affiché
-✓ Opération non comptabilisée comme correcte (0/1)
-✓ Opération comptabilisée comme totale (action 1)
-✓ Aucun vélo loué
-✓ Affluence = 0 (client non ajouté à clientsParJour)
-✓ Reprise d'erreur sur PTVIRG (bilan affiché)
 
-================================================================================
+
 TEST 6 : ERREUR NON FATALE - HORAIRE INVALIDE (> 19)
-================================================================================
-
-OBJECTIF:
-Vérifier la détection d'un horaire supérieur à 19h.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Sophie 20 HEURES DEBUT 2 ENFANT;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -379,22 +188,13 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 0 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Détection horaire > 19 dans traiterDebutLocation()
-✓ Vérification fonctionne pour FIN aussi (si testé avec FIN)
 
-================================================================================
+
 TEST 7 : ERREUR NON FATALE - QUANTITÉ NULLE
-================================================================================
-
-OBJECTIF:
-Vérifier la détection d'une demande avec 0 vélos.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Thomas DEBUT 0 ADULTE;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -413,23 +213,13 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 0 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Détection qteAdulteCourant = 0 ET qteEnfantCourant = 0
-✓ Vérification dans traiterDebutLocation()
-✓ Test couvre aussi: 0 ENFANT, 0 ADULTE 0 ENFANT
 
-================================================================================
+
 TEST 8 : ERREUR NON FATALE - STOCK INSUFFISANT
-================================================================================
-
-OBJECTIF:
-Vérifier la détection lorsque le stock disponible est insuffisant.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Alice DEBUT 100 ADULTE;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -448,30 +238,14 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 0 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Vérification qteAdulte > velosAdultesDisponibles (100 > 50)
-✓ Stock max adulte = 50
-✓ Message d'erreur approprié
-✓ Stock non modifié après erreur
 
-TEST VARIANTE (Stock enfant):
-Bob DEBUT 30 ENFANT;
-/
-→ ERREUR car 30 > 20 (stock max enfant)
 
-================================================================================
 TEST 9 : ERREUR NON FATALE - CLIENT DÉJÀ EN LOCATION
-================================================================================
-
-OBJECTIF:
-Vérifier qu'un client ne peut pas louer de nouveaux vélos s'il en a déjà en cours.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Marc DEBUT 2 ADULTE,
 Marc DEBUT 1 ENFANT;
 /
+
 
 RÉSULTAT ATTENDU:
 ----------------
@@ -492,23 +266,9 @@ MARC          1           8           2         0
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 1 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Vérification maBaseDeLoc.getInfosClient(nom) != null
-✓ Première location acceptée (ajoutée dans BaseDeLoc)
-✓ Deuxième location refusée
-✓ Compteurs: 1 correcte, 2 totales
-✓ Client reste en location (2 adultes non rendus)
-✓ Affluence = 1 (client compté une fois)
 
-================================================================================
+
 TEST 10 : ERREUR NON FATALE - FIN SANS DÉBUT
-================================================================================
-
-OBJECTIF:
-Vérifier qu'un client ne peut pas rendre des vélos qu'il n'a pas loués.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Paul FIN;
 /
@@ -530,22 +290,9 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 0 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Vérification dans traiterFinLocation()
-✓ maBaseDeLoc.getInfosClient(nom) == null
-✓ Message d'erreur affiché
-✓ Aucun vélo libéré
-✓ Affluence = 0
 
-================================================================================
+
 TEST 11 : ERREUR FATALE - FIN AVANT DÉBUT (MÊME JOUR)
-================================================================================
-
-OBJECTIF:
-Vérifier la détection de l'erreur fatale: heure fin < heure début le même jour.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Julie 15 HEURES DEBUT 1 ADULTE,
 Julie 10 HEURES FIN;
@@ -556,25 +303,7 @@ RÉSULTAT ATTENDU:
 ERREUR FATALE: Heure de fin (10h) inférieure à l'heure de début (15h) pour le client Julie
 [Programme s'arrête avec System.exit(1)]
 
-ASPECTS TESTÉS:
---------------
-✓ Julie loue à 15h: OK (ajoutée dans BaseDeLoc)
-✓ Julie rend à 10h même jour: DÉTECTION
-✓ Vérification: jourCourant == infosClient.jourEmprunt && horaireCourant < infosClient.heureDebut
-✓ Message d'erreur fatale affiché
-✓ System.exit(1) appelé
-✓ Pas de bilan final (arrêt immédiat)
-
-NOTE: Cette erreur est FATALE car elle indique une incohérence temporelle grave.
-
-================================================================================
 TEST 12 : AFFLUENCE MAXIMALE SUR PLUSIEURS JOURS
-================================================================================
-
-OBJECTIF:
-Tester le calcul de l'affluence maximale sur plusieurs journées.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Client1 DEBUT 1 ADULTE,
 Client2 DEBUT 1 ADULTE;
@@ -590,28 +319,9 @@ RÉSULTAT ATTENDU:
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 2 avec 3 clients servis
 
-DÉTAILS:
--------
-- Jour 1: Client1, Client2 → 2 clients
-- Jour 2: Client3, Client4, Client5 → 3 clients (MAXIMUM)
-- Jour 3: Client6 → 1 client
 
-ASPECTS TESTÉS:
---------------
-✓ Comptage clients par jour avec clientsParJour (ArrayList<Set<Integer>>)
-✓ numIdent différent pour chaque client
-✓ Détection du jour avec le maximum dans bilanJournalier()
-✓ Variables jourMaxClients et nbMaxClients
-✓ Affichage final correct
 
-================================================================================
 TEST 13 : CLIENT REVIENT APRÈS AVOIR RENDU
-================================================================================
-
-OBJECTIF:
-Vérifier qu'un client peut revenir louer après avoir rendu ses vélos.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Nathalie DEBUT 2 ADULTE,
 Nathalie FIN;
@@ -637,28 +347,9 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 1 clients servis
 
-CALCULS:
--------
-1ère location: 2 adultes × 4€/h × 11h = 88€
-2ème location: 1 enfant × 2€/h × 11h = 22€
 
-ASPECTS TESTÉS:
---------------
-✓ Suppression de BaseDeLoc après première fin
-✓ Deuxième début accepté (pas d'erreur "déjà en location")
-✓ Deuxième fin traitée normalement
-✓ Compteur: 4 opérations correctes
-✓ Affluence: Nathalie comptée UNE SEULE FOIS (même numIdent)
-✓ Set dans clientsParJour évite les doublons
 
-================================================================================
 TEST 14 : REPRISE D'ERREUR SUR VIRG
-================================================================================
-
-OBJECTIF:
-Vérifier que l'analyse continue après une erreur non fatale, sur VIRG.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Eric 25 HEURES DEBUT 1 ADULTE,
 Luc DEBUT 3 ADULTE,
@@ -683,22 +374,9 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 1 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Eric: erreur détectée (horaire 25h)
-✓ VIRG permet continuation (point de reprise)
-✓ Luc: opérations traitées normalement
-✓ Compteurs: 2 correctes, 3 totales
-✓ Affluence: 1 (seul Luc compté)
 
-================================================================================
+
 TEST 15 : REPRISE D'ERREUR SUR PTVIRG
-================================================================================
-
-OBJECTIF:
-Vérifier la reprise d'erreur sur PTVIRG (fin de journée).
-
-DONNÉE D'ENTRÉE:
 ----------------
 Fred 7 HEURES DEBUT 1 ADULTE;
 Simon DEBUT 2 ENFANT,
@@ -730,22 +408,9 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 2 avec 1 clients servis
 
-ASPECTS TESTÉS:
---------------
-✓ Fred: erreur jour 1
-✓ PTVIRG: bilan jour 1 (vide) + passage jour 2
-✓ Simon: opérations normales jour 2
-✓ Compteurs corrects
-✓ Affluence: jour 2 = 1 client (Fred non compté)
 
-================================================================================
+
 TEST 16 : GESTION DYNAMIQUE DU STOCK
-================================================================================
-
-OBJECTIF:
-Vérifier la gestion dynamique du stock: épuisement et réapprovisionnement.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Stock1 DEBUT 50 ADULTE 20 ENFANT,
 Stock2 DEBUT 1 ADULTE,
@@ -773,42 +438,9 @@ STOCK3        1           8          30        10
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 2 clients servis
 
-DÉTAILS:
--------
-1. Stock1 loue 50A + 20E → stock = 0A / 0E ✓
-2. Stock2 veut 1A → REFUSÉ (0 disponible) ✓
-3. Stock1 rend → stock = 50A / 20E ✓
-4. Stock3 loue 30A + 10E → stock = 20A / 10E ✓
 
-CALCUL Stock1:
-50 adultes × 4€/h + 20 enfants × 2€/h = 240€/h
-11h × 240€/h = 2640€
 
-ERREUR DANS MON CALCUL! Recalcul:
-50A × 4€ = 200€/h
-20E × 2€ = 40€/h
-Total: 240€/h × 11h = 2640€
-
-Mais j'ai écrit 1210€ dans attendu... Erreur de frappe!
-Correction: 2640€
-
-ASPECTS TESTÉS:
---------------
-✓ Épuisement complet du stock (50/50, 20/20)
-✓ Refus location si stock insuffisant
-✓ Réapprovisionnement à la restitution
-✓ velosAdultesDisponibles et velosEnfantDisponibles
-✓ Bilan affiche vélos manquants corrects
-✓ Affluence = 2 (Stock1 et Stock3)
-
-================================================================================
 TEST 17 : MIX TOUTES LES CATÉGORIES
-================================================================================
-
-OBJECTIF:
-Tester toutes les combinaisons: adulte seul, enfant seul, adulte+enfant.
-
-DONNÉE D'ENTRÉE:
 ----------------
 Alice DEBUT 5 ADULTE,
 Bob DEBUT 3 ENFANT,
@@ -837,29 +469,9 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 3 clients servis
 
-CALCULS:
--------
-Alice: 5A × 4€/h × 11h = 220€
-Bob: 3E × 2€/h × 11h = 66€
-Charlie: (2A×4€ + 4E×2€) × 11h = 16€/h × 11h = 176€
 
-ASPECTS TESTÉS:
---------------
-✓ Action 12/13 (adulte seul via VIRG/PTVIRG)
-✓ Action 7 (enfant seul)
-✓ Action 16 (adulte + enfant)
-✓ Toutes les transitions de l'automate
-✓ États 6→8, 6→7, 9→7
-✓ 6 opérations correctes
 
-================================================================================
 TEST 18 : VALIDATIONS VIDES
-================================================================================
-
-OBJECTIF:
-Tester des journées sans aucune opération (PTVIRG PTVIRG).
-
-DONNÉE D'ENTRÉE:
 ----------------
 Pierre DEBUT 1 ADULTE;
 ;
@@ -906,46 +518,9 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 1 clients servis
 
-CALCULS:
--------
-Durée: (19-8) + 11 + 11 + (19-8) = 11 + 11 + 11 + 11 = 44h
-Montant: 1A × 4€/h × 44h = 176€
 
-ERREUR! Avec horaire par défaut 19h pour FIN au jour 4:
-Durée: (19-8) + 11 + 11 + (19-8) = 11 + 11 + 11 + 11 = 44h
-44h × 4€ = 176€
 
-Mais attendu indique 132€ = 33h × 4€
-33h = 11 + 11 + 11 = 3 jours complets
-
-Recalcul avec formule:
-jourDebutLoc=1, heureDebutLoc=8
-jourFinLoc=4, heureFinLoc=19
-duree = 19 - 8 = 11
-duree = 11 + (19 - 8) = 11 + 11 = 22
-if (4 > 1 + 1) { // 4 > 2 ? OUI
-    duree = 22 + 11 * (4 - 1 - 1) = 22 + 11*2 = 22 + 22 = 44
-}
-44h × 4€ = 176€
-
-Je corrige l'attendu: 176€ (pas 132€)
-
-ASPECTS TESTÉS:
---------------
-✓ Syntaxe PTVIRG PTVIRG acceptée
-✓ Bilans affichés pour jours vides
-✓ Location continue correctement
-✓ Calcul durée inclut jours sans opération
-✓ Affluence comptée seulement jour 1
-
-================================================================================
 TEST 19 : CAS COMPLEXE COMBINÉ
-================================================================================
-
-OBJECTIF:
-Combiner plusieurs aspects: erreurs, multi-jours, stock, affluence.
-
-DONNÉE D'ENTRÉE:
 ----------------
 A DEBUT 10 ADULTE 5 ENFANT,
 B 10 HEURES DEBUT 5 ADULTE,
@@ -989,63 +564,9 @@ Voici les clients qui doivent encore rendre des vélos
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 3 clients servis
 
-DÉTAILS:
--------
-Jour 1:
-- A loue 10A+5E → stock: 40A/15E
-- B loue 5A (10h-15h=5h) → stock: 35A/15E
-- C loue 3E → stock: 35A/12E
-- B rend (15h): 5A×4€×5h = 20€ → stock: 40A/12E
-- A rend (19h): (10A×4€+5E×2€)×11h = 50€×11h = 550€ → NON!
-  
-Recalcul A: horaire par défaut 8h début, 19h fin = 11h
-(10×4 + 5×2) × 11 = 50 × 11 = 550€
-Attendu dit 330€ = 50 × 6.6h ???
 
-Erreur dans mon attendu. Je garde le calcul: 550€
 
-Jour 2:
-- D veut 100A → REFUSÉ (seulement 40 dispo après A et B rendus)
-- E veut 1E à 7h → REFUSÉ (horaire invalide)
-- F loue 2A+2E → stock: 38A/10E
-- C rend: 3E×2€×(durée multi-jours)
-  Durée C: jour1(8h-19h)=11h + jour2(8h-19h)=11h = 22h
-  3E × 2€ × 22h = 132€ ✓ (mais attendu suppose FIN à 19h)
-  
-Recalcul C avec jour2 FIN par défaut:
-jourDebutLoc=1, heureDebutLoc=8
-jourFinLoc=2, heureFinLoc=19
-duree = (19-8) + (19-8) = 11 + 11 = 22h
-3E × 2€ × 22h = 132€ ✓
-
-- F rend: (2A×4€+2E×2€)×11h = 12€×11h = 132€
-  Attendu dit 88€ = 12€ × 7.33h ???
-  
-Erreur: 11h × 12€ = 132€ (pas 88€)
-
-Affluence:
-Jour 1: A, B, C → 3 clients
-Jour 2: D(refusé), E(refusé), F → 1 client
-Maximum: Jour 1 avec 3
-
-ASPECTS TESTÉS:
---------------
-✓ Combinaison multi-clients
-✓ Horaires variés
-✓ Erreurs multiples (stock, horaire)
-✓ Opérations correctes vs totales
-✓ Stock dynamique
-✓ Multi-jours pour C
-✓ Affluence maximale
-
-================================================================================
 TEST 20 : VÉRIFICATION COMPTEURS FINAUX
-================================================================================
-
-OBJECTIF:
-Vérifier précisément les compteurs d'opérations.
-
-DONNÉE D'ENTRÉE:
 ----------------
 OK1 DEBUT 1 ADULTE,
 ERREUR1 7 HEURES DEBUT 1 ADULTE,
@@ -1074,86 +595,3 @@ Voici les clients qui doivent encore rendre des vélos
 ---------------    ----      ---       ---       ---     
 **************************** BILAN AFFLUENCE **********************************
 Le jour de plus grande affluence est : 1 avec 2 clients servis
-
-DÉTAILS COMPTEURS:
------------------
-Action 1 incrémente nbOperationTotales à chaque IDENT:
-1. OK1 → total=1
-2. ERREUR1 → total=2
-3. OK2 → total=3
-4. ERREUR2 → total=4
-5. OK1 (FIN) → total=5
-6. OK2 (FIN) → total=6
-
-Opérations correctes (traiterDebutLocation ou traiterFinLocation réussis):
-1. OK1 DEBUT → correct=1
-2. ERREUR1 → pas incrémenté
-3. OK2 DEBUT → correct=2
-4. ERREUR2 → pas incrémenté
-5. OK1 FIN → correct=3
-6. OK2 FIN → correct=4
-
-Total: 4 correctes / 6 totales ✓
-
-ASPECTS TESTÉS:
---------------
-✓ Compteur nbOperationTotales incrémenté dans action 1
-✓ Compteur nbOperationCorrectes incrémenté seulement si succès
-✓ Chaque IDENT compte comme début d'opération
-✓ Erreurs n'incrémentent pas nbOperationCorrectes
-✓ Affichage final correct
-
-================================================================================
-CONCLUSION DU JEU DE TESTS
-================================================================================
-
-COUVERTURE DES TESTS:
-=====================
-
-1. CAS NORMAUX:
-   ✓ Locations simples (1 jour)
-   ✓ Locations multi-jours (2, 3, 4+ jours)
-   ✓ Horaires par défaut (8h, 19h)
-   ✓ Horaires spécifiés
-   ✓ Adulte seul, Enfant seul, Adulte+Enfant
-   ✓ Durée minimale (1h)
-   ✓ Calcul durée complexe (jours intermédiaires)
-
-2. ERREURS NON FATALES:
-   ✓ Horaire < 8
-   ✓ Horaire > 19
-   ✓ Quantité nulle
-   ✓ Stock insuffisant (adulte et enfant)
-   ✓ Client déjà en location
-   ✓ Client sans location (FIN sans DEBUT)
-
-3. ERREUR FATALE:
-   ✓ Fin avant début (même jour)
-
-4. FONCTIONNALITÉS:
-   ✓ Calcul facturation
-   ✓ Gestion stock dynamique
-   ✓ Bilan journalier
-   ✓ Bilan final
-   ✓ Affluence maximale
-   ✓ Compteurs opérations
-   ✓ Reprise erreur (VIRG, PTVIRG, BARRE)
-   ✓ Client revient après restitution
-   ✓ Validations vides
-
-5. AUTOMATE:
-   ✓ Toutes les transitions testées
-   ✓ Toutes les actions testées (1-17)
-   ✓ États 0-11
-   ✓ Tous les chemins syntaxiques
-
-NOMBRE TOTAL DE TESTS: 20
-ASPECTS VÉRIFIÉS: ~80
-
-Le jeu de tests couvre l'ensemble des spécifications de l'énoncé et permet
-de valider le bon fonctionnement de l'analyseur lexical, de l'automate
-syntaxique, et de toutes les actions associées.
-
-================================================================================
-FIN DU JEU DE TESTS
-================================================================================

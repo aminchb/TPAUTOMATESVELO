@@ -19243,3 +19243,128 @@ AVERTISSEMENT: Unmatched cancel notification for request id 10422
 2026.01.28 17:09:08 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\Automate.java. Using fallback presentation compiler.
 2026.01.28 17:09:08 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\Automate.java. Using fallback presentation compiler.
 2026.01.28 17:09:10 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\Automate.java. Using fallback presentation compiler.
+2026.01.28 21:56:09 INFO  Started: Metals version 1.6.5 in folders 'C:\Users\aminc\Desktop\TPAUTOMATESVELO' for client Visual Studio Code 1.108.2.
+2026.01.28 21:56:09 INFO  Memory monitor started
+2026.01.28 21:56:14 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.01.28 21:56:14 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:15 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+janv. 28, 2026 9:56:15 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVERTISSEMENT: Unmatched cancel notification for request id 2
+2026.01.28 21:56:15 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:16 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:15 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:15 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:15 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+janv. 28, 2026 9:56:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVERTISSEMENT: Unmatched cancel notification for request id 11
+janv. 28, 2026 9:56:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVERTISSEMENT: Unmatched cancel notification for request id 12
+janv. 28, 2026 9:56:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVERTISSEMENT: Unmatched cancel notification for request id 9
+2026.01.28 21:56:16 WARN  no build tool detected in workspace 'C:\Users\aminc\Desktop\TPAUTOMATESVELO'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2026.01.28 21:56:16 WARN  Build server is not auto-connectable.
+2026.01.28 21:56:17 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:16 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java
+2026.01.28 21:56:17 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:21 INFO  time: code lens generation in 4.54s
+2026.01.28 21:56:22 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:22 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:25 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:26 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:28 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:28 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:56:41 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 21:57:17 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+janv. 28, 2026 9:57:23 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFOS: Unsupported notification method: $/setTrace
+2026.01.28 22:15:34 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\main\Velo.java
+2026.01.28 22:15:34 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\main\Velo.java. Using fallback presentation compiler.
+2026.01.28 22:15:34 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\main\Velo.java. Using fallback presentation compiler.
+2026.01.28 22:15:34 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\main\Velo.java. Using fallback presentation compiler.
+2026.01.28 22:15:34 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\main\Velo.java. Using fallback presentation compiler.
+2026.01.28 22:18:03 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\main\Velo.java. Using fallback presentation compiler.
+2026.01.28 22:18:03 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java
+2026.01.28 22:18:03 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:03 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:03 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:04 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:03 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:05 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:44 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:46 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:57 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:59 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:59 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java
+2026.01.28 22:18:59 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:59 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:18:59 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:19:00 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:19:00 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:20:56 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:20:57 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:22:18 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:47 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:47 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java
+2026.01.28 22:26:47 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:47 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:47 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:58 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:58 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java
+2026.01.28 22:26:58 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:58 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:58 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:58 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:26:58 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:01 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:06 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:06 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:07 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:08 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:08 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:15 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:15 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:16 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:18 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:19 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:20 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:22 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:24 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:25 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:25 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:25 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:27 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:27 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:30 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:30 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java
+2026.01.28 22:27:30 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:30 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:30 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:32 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:33 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:36 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:27:36 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:50 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\LexVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:50 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java
+2026.01.28 22:49:50 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:51 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:50 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:51 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:50 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:50 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:51 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java
+2026.01.28 22:49:50 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:51 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:52 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:52 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:55 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:49:55 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:05 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:10 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\AutoVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:10 WARN  no build target for: C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java
+2026.01.28 22:50:10 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:11 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:10 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:11 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:10 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:10 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
+2026.01.28 22:50:13 INFO  no build target found for C:\Users\aminc\Desktop\TPAUTOMATESVELO\src\analyseurs\ActVelo.java. Using fallback presentation compiler.
