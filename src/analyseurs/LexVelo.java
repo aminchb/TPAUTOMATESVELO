@@ -59,14 +59,14 @@ public class LexVelo extends Lex {
 	/**
 	 * @return la valeur de l'attribut de l'item NBENTIER
 	 */
-	public final int getvalEnt() {
+	public final int getValEnt() {
 		return valEnt;
 	}
 
 	/**
 	 * @return la valeur de l'attribut de l'item IDENT
 	 */
-	public final int getnumIdCourant() {
+	public final int getNumIdCourant() {
 		return numIdCourant;
 	}
 

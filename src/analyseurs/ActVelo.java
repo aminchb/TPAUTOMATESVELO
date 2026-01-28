@@ -29,7 +29,7 @@ public class ActVelo extends AutoVelo {
 	// TODO compléter la table ACTION
 	private final int[][] ACTION = {
 			// Etat ADULTE DEBUT ENFANT FIN HEURES IDENT NBENTIER VIRG PTVIRG BARRE AUTRES
-			/* 0 */ { -1,    -1,    -1,   -1,   -1,     1,     -1,   -1,   -1,    17,    -1 },
+			/* 0 */ { -1,    -1,    -1,   -1,   -1,     1,     -1,   -1,   16,    17,    -1 },
 			/* 1 */ { -1,     5,    -1,    4,   -1,    -1,      2,   -1,   -1,    -1,    -1 },
 			/* 2 */ { -1,    -1,    -1,   -1,    3,    -1,     -1,   -1,   -1,    -1,    -1 },
 			/* 3 */ { -1,     5,    -1,    4,   -1,    -1,     -1,   -1,   -1,    -1,    -1 },
@@ -39,7 +39,7 @@ public class ActVelo extends AutoVelo {
 			/* 7 */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,    11,   12,    -1,    -1 },
 			/* 8 */ { -1,    -1,    -1,   -1,   -1,    -1,      9,   13,   14,    -1,    -1 },
 			/* 9 */ { -1,    -1,    10,   -1,   -1,    -1,     -1,   -1,   -1,    -1,    -1 },
-			/* e */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,   -1,   -1,    -1,    -1 }, /* 10 */
+			/* e */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,   -1,   16,    17,    -1 }, /* 10 */
 			/* f */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,   -1,   -1,    -1,    -1 }, /* 11 */
 	};
 
@@ -162,7 +162,7 @@ public class ActVelo extends AutoVelo {
 				break;
 
 			case 1 : // IDENT reconnu - début d'opération
-				numIdentClientCourant = analyseurLexical.getnumIdCourant();
+				numIdentClientCourant = analyseurLexical.getNumIdCourant();
 				nomClientCourant = analyseurLexical.chaineIdent(numIdentClientCourant);
 				horairePresent = false;
 				horaireCourant = 8; // par défaut
@@ -172,7 +172,7 @@ public class ActVelo extends AutoVelo {
 				nbOperationTotales++;
 				break;
 			case 2: // NBENTIER reconnu après IDENT (horaire)
-				horaireCourant = analyseurLexical.getvalEnt();
+				horaireCourant = analyseurLexical.getValEnt();
 				horairePresent = true;
 				break;
 			case 3: // HEURES reconnu
@@ -193,7 +193,7 @@ public class ActVelo extends AutoVelo {
 				qteAdulteCourant = 0;
 				qteEnfantCourant = 0;
 				// tmp (on sait pas encore si adulte OU enfant)
-				qteAdulteCourant = analyseurLexical.getvalEnt();
+				qteAdulteCourant = analyseurLexical.getValEnt();
 				break;
 			case 7: // ENFANT après première quantité
 				qteEnfantCourant = qteAdulteCourant;
@@ -204,7 +204,7 @@ public class ActVelo extends AutoVelo {
 				// déjà rempli
 				break;
 			case 9: // NBENTIER après ADULTE (deuxième quantité)
-				qteEnfantCourant = analyseurLexical.getvalEnt();
+				qteEnfantCourant = analyseurLexical.getValEnt();
 				break;
 			case 10: // ENFANT après deuxième quantité
 				traiterDebutLocation();
@@ -236,7 +236,13 @@ public class ActVelo extends AutoVelo {
 				break;
 			case 17: // BARRE - fin de l'analyse
 				bilanFinal();
-				break;
+            	System.out.println("\nFin d'analyse. La fenêtre graphique est encore active, pour continuer tapez entrée");
+            	try {
+                	System.in.read();
+            	} catch (Exception e) {
+
+				}
+            	System.exit(0);
 			default:
 				Lecture.attenteSurLecture("action " + numAction + " non prévue");
 		}
