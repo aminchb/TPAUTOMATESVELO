@@ -29,10 +29,18 @@ public class ActVelo extends AutoVelo {
 	// TODO compléter la table ACTION
 	private final int[][] ACTION = {
 			// Etat ADULTE DEBUT ENFANT FIN HEURES IDENT NBENTIER VIRG PTVIRG BARRE AUTRES
-			/* 0 */ { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-			/* 1 */ { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-			/* 2 */ { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-			/* ... {...} */
+			/* 0 */ { -1,    -1,    -1,   -1,   -1,     1,     -1,   -1,   -1,    17,    -1 },
+			/* 1 */ { -1,     5,    -1,    4,   -1,    -1,      2,   -1,   -1,    -1,    -1 },
+			/* 2 */ { -1,    -1,    -1,   -1,    3,    -1,     -1,   -1,   -1,    -1,    -1 },
+			/* 3 */ { -1,     5,    -1,    4,   -1,    -1,     -1,   -1,   -1,    -1,    -1 },
+			/* 4 */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,    15,   16,    -1,    -1 },
+			/* 5 */ { -1,    -1,    -1,   -1,   -1,    -1,      6,   -1,   -1,    -1,    -1 },
+			/* 6 */ {  8,    -1,     7,   -1,   -1,    -1,     -1,   -1,   -1,    -1,    -1 },
+			/* 7 */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,    11,   12,    -1,    -1 },
+			/* 8 */ { -1,    -1,    -1,   -1,   -1,    -1,      9,   13,   14,    -1,    -1 },
+			/* 9 */ { -1,    -1,    10,   -1,   -1,    -1,     -1,   -1,   -1,    -1,    -1 },
+			/* e */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,   -1,   -1,    -1,    -1 }, /* 10 */
+			/* f */ { -1,    -1,    -1,   -1,   -1,    -1,     -1,   -1,   -1,    -1,    -1 }, /* 11 */
 	};
 
 	/** Nombre de vélos initialement disponibles */
@@ -58,7 +66,21 @@ public class ActVelo extends AutoVelo {
 	// contenues dans la donnée à analyser
 	private int nbOperationCorrectes;
 
-	// TODO compléter la déclaration des variables nécessaires aux actions
+	// variables opérations en cours
+	private String nomClientCourant;
+	private int numIdentClientCourant;
+	private int horaireCourant;
+	private boolean horairePresent;
+	private int qteAdulteCourant;
+	private int qteEnfantCourant;
+	// velos dispos
+	private int velosAdultesDisponibles;
+	private int velosEnfantDisponibles;
+	// jour max clients
+	private int jourMaxClients;
+	private int nbMaxClients;
+	// gestion d'erreur
+	private boolean erreurEnCours;
 
 	/**
 	 * Constructeur classe ActVelo
@@ -99,8 +121,22 @@ public class ActVelo extends AutoVelo {
 		clientsParJour.add(0, new HashSet<>());
 		clientsParJour.add(1, new HashSet<>());
 
-		// TODO compléter l'initialisation des variables nécessaires aux actions
+		// init velos dispo
+		velosAdultesDisponibles = MAX_VELOS_ADULTES;
+		velosEnfantDisponibles = MAX_VELOS_ENFANT;
 
+		// init suivi jour
+		jourMaxClients = 1;
+		nbMaxClients = 0;
+
+		// init var temp
+		nomClientCourant = "";
+		numIdentClientCourant = -1;
+		horaireCourant = 8;
+		horairePresent = false;
+		qteAdulteCourant = 0;
+		qteEnfantCourant = 0;
+		erreurEnCours = false;
 	}
 
 	/**
@@ -125,11 +161,180 @@ public class ActVelo extends AutoVelo {
 			case -1: // action vide
 				break;
 
-			// TODO compléter les actions
-
+			case 1 : // IDENT reconnu - début d'opération
+				numIdentClientCourant = analyseurLexical.getnumIdCourant();
+				nomClientCourant = analyseurLexical.chaineIdent(numIdentClientCourant);
+				horairePresent = false;
+				horaireCourant = 8; // par défaut
+				qteAdulteCourant = 0;
+				qteEnfantCourant = 0;
+				erreurEnCours = false;
+				nbOperationTotales++;
+				break;
+			case 2: // NBENTIER reconnu après IDENT (horaire)
+				horaireCourant = analyseurLexical.getvalEnt();
+				horairePresent = true;
+				break;
+			case 3: // HEURES reconnu
+				// rien à faire (horaire déjà stocké dans act => 2)
+				break;
+			case 4: // FIN reconnu - opération de fin de location
+				if (!horairePresent) {
+					horaireCourant = 19; // par défaut
+				}
+				traiterFinLocation();
+				break;
+			case 5: // DEBUT reconnu - début d'opération de début de location
+				if (!horairePresent) {
+					horaireCourant = 8; // par défaut
+				}
+				break;
+			case 6: // NBENTIER après DEBUT - première quantité
+				qteAdulteCourant = 0;
+				qteEnfantCourant = 0;
+				// tmp (on sait pas encore si adulte OU enfant)
+				qteAdulteCourant = analyseurLexical.getvalEnt();
+				break;
+			case 7: // ENFANT après première quantité
+				qteEnfantCourant = qteAdulteCourant;
+				qteAdulteCourant = 0;
+				traiterDebutLocation();
+				break;
+			case 8: // ADULTE après première quantité
+				// déjà rempli
+				break;
+			case 9: // NBENTIER après ADULTE (deuxième quantité)
+				qteEnfantCourant = analyseurLexical.getvalEnt();
+				break;
+			case 10: // ENFANT après deuxième quantité
+				traiterDebutLocation();
+				break;
+			case 11: // VIRG après opération complète (enfant seul)
+				// rien à faire
+				break;
+			case 12: // PTVIRG après opération complète (enfant seul) - fin de journée
+				bilanJournalier();
+				jourCourant++;
+				clientsParJour.add(jourCourant, new HashSet<>());
+				break;
+			case 13: // VIRG après adulte seul
+				traiterDebutLocation();
+				break;
+			case 14: // PTVIRG après adulte seul - fin de journée
+				traiterDebutLocation();
+				bilanJournalier();
+				jourCourant++;
+				clientsParJour.add(jourCourant, new HashSet<>());
+				break;
+			case 15: // VIRG après FIN
+				// rien à faire
+				break;
+			case 16: // PTVIRG après FIN - fin de journée
+				bilanJournalier();
+				jourCourant++;
+				clientsParJour.add(jourCourant, new HashSet<>());
+				break;
+			case 17: // BARRE - fin de l'analyse
+				bilanFinal();
+				break;
 			default:
 				Lecture.attenteSurLecture("action " + numAction + " non prévue");
 		}
+	}
+
+	private void traiterDebutLocation(){
+		if (erreurEnCours) {
+			return;
+		}
+		// Verif horaire
+		if (horaireCourant < 8 || horaireCourant > 19) {
+			Ecriture.ecrireStringln("ERREUR: Horaire invalide (" + horaireCourant + "h) pour le client " + nomClientCourant);
+			return;
+		}
+		// Verif quantite
+		if (qteAdulteCourant == 0 && qteEnfantCourant == 0) {
+			Ecriture.ecrireStringln("ERREUR: Aucun vélo demandé pour le client " + nomClientCourant);
+			return;
+		}
+		// Verif dispo
+		if (qteAdulteCourant > velosAdultesDisponibles || qteEnfantCourant > velosEnfantDisponibles) {
+			Ecriture.ecrireStringln("ERREUR: Pas assez de vélos disponibles pour le client " + nomClientCourant);
+			return;
+		}
+		// Verif client pas de loc en cours
+		if (maBaseDeLoc.getInfosClient(nomClientCourant) != null) {
+			Ecriture.ecrireStringln("ERREUR: Le client " + nomClientCourant + " a déjà une location en cours");
+			return;
+		}
+		// Enregistrement location
+		maBaseDeLoc.enregistrerLoc(nomClientCourant, jourCourant, horaireCourant, qteAdulteCourant, qteEnfantCourant);
+		// Maj vélos dispos
+		velosAdultesDisponibles -= qteAdulteCourant;
+		velosEnfantDisponibles -= qteEnfantCourant;
+		// Ajout client ens clients jour
+		clientsParJour.get(jourCourant).add(numIdentClientCourant);
+		// Operat correcte = ++
+		nbOperationCorrectes++;
+	}
+
+	private void traiterFinLocation() {
+		if (erreurEnCours) {
+			return;
+		}
+		// Verif horaire
+		if (horaireCourant < 8 || horaireCourant > 19) {
+			Ecriture.ecrireStringln("ERREUR: Horaire invalide (" + horaireCourant + "h) pour le client " + nomClientCourant);
+			return;
+		}
+		InfosClient infosClient = maBaseDeLoc.getInfosClient(nomClientCourant);
+		if (infosClient == null) {
+			Ecriture.ecrireStringln("ERREUR: Le client " + nomClientCourant + " n'a pas de location en cours");
+			return;
+		}
+		// Verif cohérence temps
+		if (jourCourant == infosClient.jourEmprunt && horaireCourant < infosClient.heureDebut) {
+			Ecriture.ecrireStringln("ERREUR FATALE: Heure de fin (" + horaireCourant + "h) inférieure à l'heure de début (" + infosClient.heureDebut + "h) pour le client " + nomClientCourant);
+			System.exit(1);
+		}
+		int duree = calculDureeLoc(infosClient.jourEmprunt, infosClient.heureDebut, jourCourant, horaireCourant);
+		int montant = duree * (infosClient.qteAdulte * 4 + infosClient.qteEnfant * 2);
+		// affiche facture
+		Ecriture.ecrireStringln("Le client: " + nomClientCourant.toUpperCase() + " doit payer : " + montant + " euros pour " + infosClient.qteAdulte + " vélo(s) adulte et " + infosClient.qteEnfant + " vélo(s) enfant");
+		// Maj velos dispos
+		velosAdultesDisponibles += infosClient.qteAdulte;
+		velosEnfantDisponibles += infosClient.qteEnfant;
+		// Suppression location
+		maBaseDeLoc.supprimerClient(nomClientCourant);
+		// Ajout client ens clients jour
+		clientsParJour.get(jourCourant).add(numIdentClientCourant);
+		// Opérat correcte = ++
+		nbOperationCorrectes++;
+	}
+
+	private void bilanJournalier() {
+		Ecriture.ecrireStringln("******************************************************************************");
+		Ecriture.ecrireStringln("BILAN DU JOUR " + jourCourant);
+		maBaseDeLoc.afficherLocationsEnCours();
+		// velos manquants
+		int velosAdultesManquants = MAX_VELOS_ADULTES - velosAdultesDisponibles;
+		int velosEnfantManquants = MAX_VELOS_ENFANT - velosEnfantDisponibles;
+		// affichage
+		Ecriture.ecrireStringln("Nombre de vélos adulte manquants : " + velosAdultesManquants);
+		Ecriture.ecrireStringln("Nombre de vélos enfant manquants : " + velosEnfantManquants);
+		// Maj jour max clients
+		int nbClientsJour = clientsParJour.get(jourCourant).size();
+		if (nbClientsJour > nbMaxClients) {
+			nbMaxClients = nbClientsJour;
+			jourMaxClients = jourCourant;
+		}
+	}
+
+	private void bilanFinal() {
+		Ecriture.ecrireStringln("Opérations correctes : " + nbOperationCorrectes + " - Nombre total d'opérations : " + nbOperationTotales);
+		Ecriture.ecrireStringln("Voici les clients qui doivent encore rendre des vélos");
+		maBaseDeLoc.afficherLocationsEnCours();
+		Ecriture.ecrireStringln("**************************** BILAN AFFLUENCE **********************************");
+		Ecriture.ecrireStringln("Le jour de plus grande affluence est : " + jourMaxClients + " avec " + nbMaxClients + " clients servis");
 	}
 
 	/**
