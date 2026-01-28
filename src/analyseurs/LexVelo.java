@@ -85,7 +85,9 @@ public class LexVelo extends Lex {
 		do {
 			s = s + getCarLu();
 			lireCarLu();
-		} while ((getCarLu() >='a' && getCarLu() <='z') || (getCarLu() >='A' && getCarLu() <='Z'));
+		} while ((getCarLu() >='a' && getCarLu() <='z') || (getCarLu() >='A' && getCarLu() <='Z')|| 
+                  (getCarLu() >='0' && getCarLu() <='9') || 
+                   getCarLu() == '_' );
 		
 		// Mot reservé
 		for (int i=0; i<NBRES; i++){
